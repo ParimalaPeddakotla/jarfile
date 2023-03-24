@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>tr.com.obss.sdlc.pom</groupId>
+	<artifactId>root-pom-archetype</artifactId>
+	<version>3.1.0</version><!-- Major version must be same as maven major version -->
+
+	<packaging>pom</packaging>
+	<name>OBSS Root Project Object Model for all Maven Archetypes</name>
+	
+	<parent>
+		<groupId>tr.com.obss.sdlc.pom</groupId>
+		<artifactId>root-pom</artifactId>
+		<version>3.1.0</version>
+	</parent>
+	
+	<description>OBSS Root Project Object Model for all Maven Archetypes.</description>
+	
+	<licenses>
+		<license>
+			<name>OBSS Open Source License, Version 1.0</name>
+			<url>https://dev.obss.com.tr/sdlc/license/OOSL-1.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>OBSS Open Source License for Open Business</comments>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<id>rcm</id>
+			<email>rcm@obss.com.tr</email>
+			<organization>OBSS</organization>
+			<organizationUrl>http://obss.com.tr</organizationUrl>
+		</developer>
+	</developers>
+  
+	<!-- Theese are generic properties that may be used by child POMs. -->
+	<!-- They should be overridden by child POMs properly *as needed*. -->
+	<properties>
+		<!-- Basic package properties -->
+		<pkg.title>Unknown Maven Archetype</pkg.title>
+		<pkg.technology.code>ARCH</pkg.technology.code>
+
+		<!-- Enterprise-wide dependency information -->
+		
+		<!-- Other possible values -->
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>				
+		</dependencies>
+	</dependencyManagement>
+
+	<build>		
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/**</include>
+				</includes>			
+			</resource>
+		</resources>
+		
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/**</include>
+				</includes>	
+			</testResource>
+		</testResources>
+		
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>2.3</version>
+			</extension>
+		</extensions>
+	</build>
+</project>

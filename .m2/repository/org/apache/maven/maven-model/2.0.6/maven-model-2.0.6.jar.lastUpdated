@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:51 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679639031388
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact org.apache.maven\:maven-model\:jar\:2.0.6 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/org/apache/maven/maven-model/2.0.6/maven-model-2.0.6.jar 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679639031064

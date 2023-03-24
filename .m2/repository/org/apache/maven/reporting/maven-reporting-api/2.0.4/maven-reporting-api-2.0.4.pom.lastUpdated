@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:28 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679639008984
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact org.apache.maven.reporting\:maven-reporting-api\:pom\:2.0.4 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/org/apache/maven/reporting/maven-reporting-api/2.0.4/maven-reporting-api-2.0.4.pom 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679639008954

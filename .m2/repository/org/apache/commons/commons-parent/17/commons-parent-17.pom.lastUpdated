@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:06 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679638986563
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact org.apache.commons\:commons-parent\:pom\:17 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/org/apache/commons/commons-parent/17/commons-parent-17.pom 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679638986524

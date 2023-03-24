@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:49 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679639029958
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact org.codehaus.plexus\:plexus-utils\:pom\:1.5.8 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/org/codehaus/plexus/plexus-utils/1.5.8/plexus-utils-1.5.8.pom 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679639029938

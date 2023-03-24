@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>tr.com.obss.sdlc.archetype</groupId>
+	<artifactId>obss-archetype-java</artifactId>
+	<version>3.0.0</version>
+	
+	<packaging>maven-archetype</packaging>  
+	<name>OBSS Common Java Archetype</name>
+	<description>This archetype provides a common skelton for the Java packages.</description>
+
+	<parent>
+		<groupId>tr.com.obss.sdlc.pom</groupId>
+		<artifactId>root-pom-archetype</artifactId>
+		<version>3.1.0</version>
+	</parent>
+	
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>2.3</version>
+			</extension>
+		</extensions>
+	</build>
+	
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>	
+</project>

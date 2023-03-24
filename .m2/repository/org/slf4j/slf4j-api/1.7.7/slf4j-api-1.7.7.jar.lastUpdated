@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:05 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679638985493
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact org.slf4j\:slf4j-api\:jar\:1.7.7 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679638985078

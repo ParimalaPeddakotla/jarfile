@@ -1,0 +1,1641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>tr.com.obss.sdlc.pom</groupId>
+	<artifactId>root-pom</artifactId>
+	<version>3.1.0</version><!-- Major version must be same as maven major version -->
+
+	<packaging>pom</packaging>
+	<name>OBSS Root Project Object Model</name>
+	<url>${pkg.url}</url>
+	<inceptionYear>2014</inceptionYear>
+	
+	<organization>
+		<name>${org.fullName}</name>
+		<url>${org.url}</url>
+	</organization>
+	
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>
+
+	<description>OBSS Root Project Object Model for all kind of Maven projects.</description>
+
+	<licenses>
+		<license>
+			<name>OBSS Open Source License, Version 1.0</name>
+			<url>https://dev.obss.com.tr/sdlc/license/OOSL-1.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>OBSS Open Source License for Open Business</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>rcm</id>
+			<email>rcm@obss.com.tr</email>
+			<organization>OBSS</organization>
+			<organizationUrl>http://obss.com.tr</organizationUrl>
+		</developer>
+	</developers>
+ 
+	<!-- Theese are generic properties that may be used by child POMs. -->
+	<!-- They should be overridden by child POMs properly *as needed*. -->
+	<properties>
+		<!-- Basic package properties -->
+		<pkg.title>Unknown Software Package</pkg.title>
+		<pkg.name>${project.artifactId}</pkg.name>
+		<pkg.code>UNKNOWN</pkg.code>
+		<pkg.url>${pkg.links.homepage}</pkg.url>
+		<pkg.description><!-- EMPTY --></pkg.description>
+		<pkg.product.code>UNKNOWN</pkg.product.code>
+		<pkg.technology.code>JAVA</pkg.technology.code>
+
+		<!-- Version related properties -->
+		<pkg.version.number>${project.version}</pkg.version.number>
+		<pkg.version.qualifier><!-- EMPTY --></pkg.version.qualifier>
+		<pkg.version.buildNumber>0</pkg.version.buildNumber>
+		<pkg.version.string>${pkg.version.number}</pkg.version.string>
+		
+		<!-- Project links for configuration management environments -->
+		<pkg.links.homepage>${app.common.baseUrl}/confluence/display/${pkg.product.code}</pkg.links.homepage>
+		<pkg.links.ci>${app.common.baseUrl}/bamboo/browse/${pkg.product.code}</pkg.links.ci>
+		<pkg.links.issue>${app.common.baseUrl}/jira/browse/${pkg.product.code}</pkg.links.issue>
+		<pkg.links.scm>scm:git:ssh://git@${app.common.hostName}:7999/${pkg.product.code}/${pkg.name}.git</pkg.links.scm>
+		<pkg.links.scm.dev>scm:git:ssh://git@${app.common.hostName}:7999/${pkg.product.code}/${pkg.name}.git</pkg.links.scm.dev>
+		<pkg.links.scm.url>${app.common.baseUrl}/fecru/changelog/${pkg.name}</pkg.links.scm.url>	
+		
+		<!-- Build related properties -->
+		<pkg.build.sourceEncoding>UTF-8</pkg.build.sourceEncoding>
+		<pkg.build.javaVersion>1.7</pkg.build.javaVersion>
+		<pkg.build.sourceJavaVersion>${pkg.build.javaVersion}</pkg.build.sourceJavaVersion>
+		<pkg.build.targetJavaVersion>${pkg.build.javaVersion}</pkg.build.targetJavaVersion>
+		
+		<!-- Organization related properties -->
+		<org.name>OBSS</org.name>
+		<org.fullName>Open Business Software Solutions</org.fullName>
+		<org.url>http://obss.com.tr/</org.url>
+		<org.vendorId>tr.com.obss</org.vendorId>
+		
+		<!-- Unit Test Coverage Policy -->
+		<pol.utest.classRatio>0</pol.utest.classRatio>
+		<pol.utest.instructionRatio>0</pol.utest.instructionRatio>
+		<pol.utest.methodRatio>0</pol.utest.methodRatio>
+		<pol.utest.branchRatio>0</pol.utest.branchRatio>
+		<pol.utest.complexityRatio>0</pol.utest.complexityRatio>
+		<pol.utest.lineRatio>0</pol.utest.lineRatio>
+		
+		<!-- Properties for SDLC applications. URLS's should not contain trailing slash. -->
+		<sys.hostName>dev.obss.com.tr</sys.hostName>		
+		
+		<app.web.hostName>dev.obss.com.tr</app.web.hostName><!-- Private -->
+		<app.web.baseUrl>https://${app.web.hostName}</app.web.baseUrl>
+		<app.common.hostName>${sys.hostName}</app.common.hostName><!-- Public -->
+		<app.common.baseUrl>https://${app.common.hostName}</app.common.baseUrl>
+		
+		<app.jira.baseUrl>${app.web.baseUrl}/jira</app.jira.baseUrl>
+		<app.confluence.baseUrl>${app.web.baseUrl}/confluence</app.confluence.baseUrl>
+		<app.stash.baseUrl>${app.web.baseUrl}/stash</app.stash.baseUrl>
+		<app.bamboo.baseUrl>${app.web.baseUrl}/bamboo</app.bamboo.baseUrl>
+		<app.fecru.baseUrl>${app.web.baseUrl}/fecru</app.fecru.baseUrl>
+		<app.sonarqube.baseUrl>${app.web.baseUrl}/sonarqube</app.sonarqube.baseUrl>
+		<app.nexus.baseUrl>${app.web.baseUrl}/nexus</app.nexus.baseUrl>
+		<app.nexus.repo.releaseUrl>${app.web.baseUrl}/nexus</app.nexus.repo.releaseUrl>
+		<app.octopus.baseUrl>http://prj.obss.com.tr</app.octopus.baseUrl>
+		<app.git.baseUrl>ssh://git@${app.common.hostName}:7999</app.git.baseUrl>
+		
+		<!-- Deployment Environment codes and environment specific configurations -->				
+		<env.code>DEV</env.code> <!-- Possible Codes: DEV, TST, UAT, FIX, PRF, PRP, PRD -->
+		<env.type>dev</env.type> <!-- For Tomcat Plugin, Remove it! -->
+		<env.name>Development</env.name>
+		<env.hostName>${env.type}</env.hostName>
+		<env.ip>127.0.0.1</env.ip>
+		<env.description><!-- EMPTY --></env.description>
+		
+		<!-- Environment specific (AS, DB etc.) configurations -->
+		<env.conf.as.type>tomcat7</env.conf.as.type> <!-- Possible Types: tomcat6, tomcat7, weblogic, glassfish, jboss etc. -->
+		<env.conf.as.hostName>${env.hostName}</env.conf.as.hostName>
+		<env.conf.as.ip>${env.ip}</env.conf.as.ip>
+		<env.conf.as.port>8080</env.conf.as.port>
+		<env.conf.as.protocol>http</env.conf.as.protocol>
+		<env.conf.as.userName>${pkg.code}</env.conf.as.userName>
+		<env.conf.as.password>change_or_override_me</env.conf.as.password>
+		<env.conf.as.contextRoot><!-- Default to none --></env.conf.as.contextRoot> <!-- With leading forward-slash if any -->
+		<env.conf.as.contextPath>/${pkg.name}</env.conf.as.contextPath> <!-- Relative to contextRoot -->
+		
+		<env.conf.db.type>mysql</env.conf.db.type> <!-- Possible Types: mysql, oracle, postgresql, odbc, db2, sqlserver -->
+		<env.conf.db.hostName>${env.hostName}</env.conf.db.hostName>
+		<env.conf.db.ip>${env.ip}</env.conf.db.ip>
+		<env.conf.db.port>3306</env.conf.db.port>
+		<env.conf.db.userName>${pkg.code}</env.conf.db.userName>
+		<env.conf.db.password>change_or_override_me</env.conf.db.password>
+		<env.conf.db.schema>${pkg.code}</env.conf.db.schema>
+		<env.conf.db.charset>UTF-8</env.conf.db.charset>
+		<env.conf.db.isDebug>true</env.conf.db.isDebug>
+		<env.conf.db.isProfile>false</env.conf.db.isProfile>
+		
+		<env.conf.db.jdbc.driver>com.mysql.jdbc.Driver</env.conf.db.jdbc.driver>
+		<env.conf.db.jdbc.url>jdbc:${env.conf.db.type}://${env.conf.db.hostName}:${env.conf.db.port}/${env.conf.db.schema}?characterEncoding=${env.conf.db.charset}&amp;amp;profileSQL=${env.conf.db.isProfile}</env.conf.db.jdbc.url>
+
+		<!-- Enterprise-wide dependency information -->
+		<dep.servlet.version>3.0.1</dep.servlet.version>
+		<dep.spring.version>2.5.5</dep.spring.version>
+		<dep.ejb.version>3.0</dep.ejb.version>
+		<dep.junit.version>4.12</dep.junit.version>
+		<dep.httpunit.version>1.7</dep.httpunit.version>
+		<dep.mockito.version>1.9.5</dep.mockito.version>
+		<dep.slf4j.version>1.7.7</dep.slf4j.version>
+		<dep.log4j.version>1.2.17</dep.log4j.version>
+		<dep.easymock.version>3.2</dep.easymock.version>
+		<dep.gson.version>2.3</dep.gson.version>
+		<dep.aspectj.version>1.8.0</dep.aspectj.version>
+		<dep.mybatis.version>3.2.7</dep.mybatis.version>
+		<dep.jaxrs.version>3.0.3.Final</dep.jaxrs.version>
+		<dep.gwt.version>2.6.1</dep.gwt.version>		
+		<dep.ojdbc.version>11.2.0</dep.ojdbc.version>		
+		<dep.httpclient.version>4.3.5</dep.httpclient.version>
+		<dep.jackson.version>1.9.12</dep.jackson.version>
+		<dep.hamcrest.version>1.3</dep.hamcrest.version>
+		<dep.jersey.version>1.18.1</dep.jersey.version>
+		<dep.hibernate.version>4.3.6.Final</dep.hibernate.version>
+		<dep.jaxws.version>2.2.8</dep.jaxws.version>
+		
+		<!-- Other possible values -->
+		
+		<!-- Maven-aware Properties -->
+		<project.build.sourceEncoding>${pkg.build.sourceEncoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${pkg.build.sourceEncoding}</project.reporting.outputEncoding>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${dep.junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>httpunit</groupId>
+				<artifactId>httpunit</artifactId>
+				<version>${dep.httpunit.version}</version>
+				<scope>test</scope>
+			</dependency>	
+			
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>${dep.easymock.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${dep.mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${dep.mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${dep.slf4j.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${dep.slf4j.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${dep.slf4j.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${dep.log4j.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${dep.spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc6</artifactId>
+				<version>${dep.ojdbc.version}</version>
+			</dependency>		
+
+			<dependency>
+				<groupId>javax.ejb</groupId>
+				<artifactId>ejb-api</artifactId>
+				<version>${dep.ejb.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${dep.jackson.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${dep.httpclient.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${dep.gson.version}</version>
+			</dependency>			
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.config</include>
+					<include>**/*.conf</include>
+					<include>**/*.cfg</include>
+					<include>**/*.cnf</include>
+					<include>**/*.ini</include>
+					<include>**/META-INF/**</include>
+				</includes>			
+			</resource>
+			
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.xml</exclude>
+					<exclude>**/*.properties</exclude>
+					<exclude>**/*.config</exclude>
+					<exclude>**/*.conf</exclude>
+					<exclude>**/*.cfg</exclude>
+					<exclude>**/*.cnf</exclude>
+					<exclude>**/*.ini</exclude>
+					<exclude>**/META-INF/**</exclude>
+				</excludes>			
+			</resource>
+		</resources>
+		
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.config</include>
+					<include>**/*.conf</include>
+					<include>**/*.cfg</include>
+					<include>**/*.cnf</include>
+					<include>**/*.ini</include>
+					<include>**/META-INF/**</include>
+				</includes>	
+			</testResource>
+			
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.xml</exclude>
+					<exclude>**/*.properties</exclude>
+					<exclude>**/*.config</exclude>
+					<exclude>**/*.conf</exclude>
+					<exclude>**/*.cfg</exclude>
+					<exclude>**/*.cnf</exclude>
+					<exclude>**/*.ini</exclude>
+					<exclude>**/META-INF/**</exclude>
+				</excludes>	
+			</testResource>
+		</testResources>
+		
+		<pluginManagement>
+			<plugins>
+				<!-- Maven Core Plugins -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.17</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.4</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.17</version>
+				</plugin>
+				
+				<!-- Packaging Types / Tools -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>2.9.1</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-rar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				
+				<!-- Reporting Plugins -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-changelog-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>2.13</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.10</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>3.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>2.17</version>
+				</plugin>
+			
+				<!-- Tools -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jarsigner-plugin</artifactId>
+					<version>1.3.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pdf-plugin</artifactId>
+					<version>1.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-plugin</artifactId>
+					<version>1.9</version>			
+				</plugin>
+				
+				<!-- Other Third Party (if any) -->
+				<plugin>
+					<groupId>org.codehaus.cargo</groupId>
+					<artifactId>cargo-maven2-plugin</artifactId>
+					<version>1.4.10</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat6-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				
+				<plugin>						
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.3.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>com.atlassian.maven.plugins</groupId>
+					<artifactId>maven-clover2-plugin</artifactId>
+					<version>4.0.2</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.7.0.201403182114</version>
+				</plugin>
+				
+				<!-- Custom Development (if any) -->
+			</plugins>
+		</pluginManagement>			
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${pkg.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+	  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<configuration>
+					<retryFailedDeploymentCount>3</retryFailedDeploymentCount>
+					<altDeploymentRepository>repo.internal-java-release::default::${app.nexus.baseUrl}/content/repositories/internal-java-release/</altDeploymentRepository>
+					<altReleaseDeploymentRepository>repo.internal-java-release::default::${app.nexus.baseUrl}/content/repositories/internal-java-release/</altReleaseDeploymentRepository>
+					<altSnapshotDeploymentRepository>repo.internal-java-snapshot::default::${app.nexus.baseUrl}/content/repositories/internal-java-snapshot/</altSnapshotDeploymentRepository>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+			</plugin>
+	  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>${pkg.build.sourceJavaVersion}</source>
+					<target>${pkg.build.targetJavaVersion}</target>
+					<encoding>${pkg.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+	  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<generateBackupPoms>true</generateBackupPoms>
+					<newVersion>${pkg.version.string}</newVersion>
+				</configuration>
+				
+				<executions>
+					<execution>
+						<id>revert-version</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>revert</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>	
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				
+				<configuration>
+					<descriptors>
+						<descriptor>${env.SYS_ROOT}/etc/sdlc/maven/assembly-zip.xml</descriptor>
+					</descriptors>
+					
+					<skipAssembly>!${prj.build.assemble}</skipAssembly>
+					<finalName>${pkg.name}-${project.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<archive>
+						<manifestEntries>
+							<Specification-Title>${pkg.title}</Specification-Title>
+							<Specification-Version>${pkg.version.string}</Specification-Version>
+							<Bundle-Version>${pkg.version.number}</Bundle-Version>
+							<Specification-Vendor>${org.fullName}</Specification-Vendor>
+							<Implementation-Title>${project.artifactId}</Implementation-Title>
+							<Implementation-Version>${pkg.version.number}-${pkg.version.buildNumber}</Implementation-Version>
+							<Implementation-Vendor>${org.fullName}</Implementation-Vendor>
+							<Implementation-Vendor-Id>${org.vendorId}</Implementation-Vendor-Id>
+							<Implementation-Vendor-URL>${org.url}</Implementation-Vendor-URL>
+							<Implementation-URL>${pkg.url}</Implementation-URL>
+							
+							<Package-Title>${pkg.title}</Package-Title>
+							<Package-Name>${pkg.name}</Package-Name>
+							<Package-Code>${pkg.code}</Package-Code>
+							<Package-Url>${pkg.url}</Package-Url>
+							<Package-Version>${pkg.version.string}</Package-Version>
+							<Package-Vendor>${org.fullName}</Package-Vendor>
+							<Package-Technology>${pkg.technology.code}</Package-Technology>
+							<Package-Product>${pkg.product.code}</Package-Product>
+						</manifestEntries>
+					</archive>					
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Specification-Title>${pkg.title}</Specification-Title>
+							<Specification-Version>${pkg.version.string}</Specification-Version>
+							<Bundle-Version>${pkg.version.number}</Bundle-Version>
+							<Specification-Vendor>${org.fullName}</Specification-Vendor>
+							<Implementation-Title>${project.artifactId}</Implementation-Title>
+							<Implementation-Version>${pkg.version.number}-${pkg.version.buildNumber}</Implementation-Version>
+							<Implementation-Vendor>${org.fullName}</Implementation-Vendor>
+							<Implementation-Vendor-Id>${org.vendorId}</Implementation-Vendor-Id>
+							<Implementation-Vendor-URL>${org.url}</Implementation-Vendor-URL>
+							<Implementation-URL>${pkg.url}</Implementation-URL>
+							
+							<Package-Title>${pkg.title}</Package-Title>
+							<Package-Name>${pkg.name}</Package-Name>
+							<Package-Code>${pkg.code}</Package-Code>
+							<Package-Url>${pkg.url}</Package-Url>
+							<Package-Version>${pkg.version.string}</Package-Version>
+							<Package-Vendor>${org.fullName}</Package-Vendor>
+							<Package-Technology>${pkg.technology.code}</Package-Technology>
+							<Package-Product>${pkg.product.code}</Package-Product>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.5</version>
+				
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Specification-Title>${pkg.title}</Specification-Title>
+							<Specification-Version>${pkg.version.string}</Specification-Version>
+							<Bundle-Version>${pkg.version.number}</Bundle-Version>
+							<Specification-Vendor>${org.fullName}</Specification-Vendor>
+							<Implementation-Title>${project.artifactId}</Implementation-Title>
+							<Implementation-Version>${pkg.version.number}-${pkg.version.buildNumber}</Implementation-Version>
+							<Implementation-Vendor>${org.fullName}</Implementation-Vendor>
+							<Implementation-Vendor-Id>${org.vendorId}</Implementation-Vendor-Id>
+							<Implementation-Vendor-URL>${org.url}</Implementation-Vendor-URL>
+							<Implementation-URL>${pkg.url}</Implementation-URL>
+							
+							<Package-Title>${pkg.title}</Package-Title>
+							<Package-Name>${pkg.name}</Package-Name>
+							<Package-Code>${pkg.code}</Package-Code>
+							<Package-Url>${pkg.url}</Package-Url>
+							<Package-Version>${pkg.version.string}</Package-Version>
+							<Package-Vendor>${org.fullName}</Package-Vendor>
+							<Package-Technology>${pkg.technology.code}</Package-Technology>
+							<Package-Product>${pkg.product.code}</Package-Product>
+						</manifestEntries>
+					</archive>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.9</version>
+				
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Specification-Title>${pkg.title}</Specification-Title>
+							<Specification-Version>${pkg.version.string}</Specification-Version>
+							<Bundle-Version>${pkg.version.number}</Bundle-Version>
+							<Specification-Vendor>${org.fullName}</Specification-Vendor>
+							<Implementation-Title>${project.artifactId}</Implementation-Title>
+							<Implementation-Version>${pkg.version.number}-${pkg.version.buildNumber}</Implementation-Version>
+							<Implementation-Vendor>${org.fullName}</Implementation-Vendor>
+							<Implementation-Vendor-Id>${org.vendorId}</Implementation-Vendor-Id>
+							<Implementation-Vendor-URL>${org.url}</Implementation-Vendor-URL>
+							<Implementation-URL>${pkg.url}</Implementation-URL>
+							
+							<Package-Title>${pkg.title}</Package-Title>
+							<Package-Name>${pkg.name}</Package-Name>
+							<Package-Code>${pkg.code}</Package-Code>
+							<Package-Url>${pkg.url}</Package-Url>
+							<Package-Version>${pkg.version.string}</Package-Version>
+							<Package-Vendor>${org.fullName}</Package-Vendor>
+							<Package-Technology>${pkg.technology.code}</Package-Technology>
+							<Package-Product>${pkg.product.code}</Package-Product>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-rar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Specification-Title>${pkg.title}</Specification-Title>
+							<Specification-Version>${pkg.version.string}</Specification-Version>
+							<Bundle-Version>${pkg.version.number}</Bundle-Version>
+							<Specification-Vendor>${org.fullName}</Specification-Vendor>
+							<Implementation-Title>${project.artifactId}</Implementation-Title>
+							<Implementation-Version>${pkg.version.number}-${pkg.version.buildNumber}</Implementation-Version>
+							<Implementation-Vendor>${org.fullName}</Implementation-Vendor>
+							<Implementation-Vendor-Id>${org.vendorId}</Implementation-Vendor-Id>
+							<Implementation-Vendor-URL>${org.url}</Implementation-Vendor-URL>
+							<Implementation-URL>${pkg.url}</Implementation-URL>
+							
+							<Package-Title>${pkg.title}</Package-Title>
+							<Package-Name>${pkg.name}</Package-Name>
+							<Package-Code>${pkg.code}</Package-Code>
+							<Package-Url>${pkg.url}</Package-Url>
+							<Package-Version>${pkg.version.string}</Package-Version>
+							<Package-Vendor>${org.fullName}</Package-Vendor>
+							<Package-Technology>${pkg.technology.code}</Package-Technology>
+							<Package-Product>${pkg.product.code}</Package-Product>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			
+			<!-- Test Plugins -->			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<inherited>true</inherited>
+			</plugin>		
+	  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.9</version>
+				
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-utils</artifactId>
+						<version>3.0.17</version>
+					</dependency>
+					
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9</version>
+					</dependency>
+				</dependencies>
+				
+				<configuration>
+					<tag>v${pkg.version.string}</tag>
+					<message>Version ${pkg.version.string} has been released.</message>
+					<connectionType>connection</connectionType>
+					<timestampFormat>YYYY-MM-dd_HH.mm.ss</timestampFormat>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<artifactId>maven-clover2-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<generatePdf>true</generatePdf>
+					<generateXml>true</generateXml>
+					<generateHtml>true</generateHtml>
+					<generateJson>true</generateJson>
+				</configuration>				
+			</plugin>		
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				
+				<configuration>
+					<mainClass>JScramblerCLI</mainClass>
+					<includeProjectDependencies>false</includeProjectDependencies>
+					<includePluginDependencies>true</includePluginDependencies>
+					
+					<arguments>
+						<argument>${env.SYS_ROOT}/etc/sdlc/jscrambler/jscrambler-config.json</argument>
+					</arguments>
+				</configuration>
+				
+				<dependencies>
+					<dependency>
+						<groupId>com.auditmark.jscrambler</groupId>
+						<artifactId>jscrambler-client</artifactId>
+						<version>1.0.1</version>
+					</dependency>
+					
+					<dependency>
+						<groupId>org.apache.maven</groupId>
+						<artifactId>maven-plugin-api</artifactId>
+						<version>2.0</version>
+					</dependency>
+					
+					<dependency>
+						<groupId>org.apache.httpcomponents</groupId>
+						<artifactId>fluent-hc</artifactId>
+						<version>4.3.4</version>
+					</dependency>
+					
+					<dependency>
+						<groupId>org.apache.httpcomponents</groupId>
+						<artifactId>httpmime</artifactId>
+						<version>4.3.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+		
+		<!-- Maven Extensions -->
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.8</version>
+			</extension>
+			
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>2.8</version>
+			</extension>
+		</extensions>	
+	</build>
+
+	<profiles>
+		<profile>
+			<id>profile-javadoc</id>
+
+			<activation>
+				<property><name>!pkg.profile.skip.javaDoc</name></property>
+			</activation>
+			
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.10.3</version>
+					</plugin>				
+				</plugins>
+			</build>
+			
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.10</version>
+						
+						<configuration>
+							<executions>
+								<execution>
+									<id>javadoc-aggregate-jar</id>
+									<goals>
+										<goal>javadoc:aggregate-jar</goal>
+									</goals>
+									<phase>package</phase>
+									<inherited>true</inherited>
+								</execution>
+								
+								<execution>
+									<id>javadoc-jar</id>
+									<goals>
+										<goal>javadoc:jar</goal>
+									</goals>
+									<phase>package</phase>
+									<inherited>true</inherited>
+								</execution>
+							</executions>
+						</configuration>
+					</plugin>
+				</plugins>			
+			</reporting>			
+		</profile>
+		
+		<profile>
+			<id>profile-version</id>
+
+			<activation>
+				<property><name>pkg.version.string</name></property>
+			</activation>
+			
+			<build>			
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>versions-maven-plugin</artifactId>
+						<version>2.1</version>
+						
+						<configuration>
+							<generateBackupPoms>true</generateBackupPoms>
+							<newVersion>${pkg.version.string}</newVersion>
+						</configuration>
+							
+						<executions>
+							<execution>
+								<id>set-version</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>set</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>profile-distribution</id>
+
+			<activation>
+				<property><name>distribute</name></property>
+			</activation>
+			
+			<build>			
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>2.8.2</version>
+						
+						<configuration>
+							<deployAtEnd>true</deployAtEnd>
+							<retryFailedDeploymentCount>3</retryFailedDeploymentCount>
+							<altDeploymentRepository>repo.internal-distro::default::${app.nexus.baseUrl}/content/repositories/internal-distro/</altDeploymentRepository>
+							<altReleaseDeploymentRepository>repo.internal-distro::default::${app.nexus.baseUrl}/content/repositories/internal-distro/</altReleaseDeploymentRepository>
+							<altSnapshotDeploymentRepository>repo.internal-distro::default::${app.nexus.baseUrl}/content/repositories/internal-distro/</altSnapshotDeploymentRepository>
+							
+							<repositoryId>repo.internal-distro</repositoryId>
+							<packaging>zip</packaging>
+							<generatePom>false</generatePom>
+							<url>${app.nexus.baseUrl}/content/repositories/internal-distro/</url>
+							<artifactId>${pkg.name}</artifactId>
+							<groupId>${pkg.technology.code}.${pkg.product.code}</groupId>
+							<version>${project.version}</version>
+							<file>${project.build.directory}/${pkg.name}-${project.version}.zip</file>							
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>profile-jacoco</id>
+
+			<activation>
+				<property><name>enable-jacoco</name></property>
+			</activation>
+			
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.7.0.201403182114</version>
+						<executions>
+							<execution>
+								<id>prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							
+							<execution>
+								<id>report</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+							
+							<execution>
+								<id>check</id>
+								
+								<goals>
+									<goal>check</goal>
+								</goals>
+								
+								<configuration>
+									<rules>
+										<rule implementation="org.jacoco.maven.RuleConfiguration">
+											<element>BUNDLE</element>
+											<limits>
+												<limit implementation="org.jacoco.report.check.Limit">
+													<counter>COMPLEXITY</counter>
+													<value>COVEREDRATIO</value>
+													<minimum>${pol.utest.complexityRatio}</minimum>
+												</limit>
+												
+												<limit>
+													<counter>INSTRUCTION</counter>
+													<value>COVEREDRATIO</value>
+													<minimum>${pol.utest.instructionRatio}</minimum>
+												</limit>
+												
+												<limit>
+													<counter>CLASS</counter>
+													<value>COVEREDRATIO</value>
+													<minimum>${pol.utest.classRatio}</minimum>
+												</limit>
+												
+												<limit>
+													<counter>BRANCH</counter>
+													<value>COVEREDRATIO</value>
+													<minimum>${pol.utest.branchRatio}</minimum>
+												</limit>
+												
+												<limit>
+													<counter>METHOD</counter>
+													<value>COVEREDRATIO</value>
+													<minimum>${pol.utest.methodRatio}</minimum>
+												</limit>
+												
+												<limit>
+													<counter>LINE</counter>
+													<value>COVEREDRATIO</value>
+													<minimum>${pol.utest.lineRatio}</minimum>
+												</limit>
+											</limits>
+										</rule>
+									</rules>									
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>		
+		</profile>
+		
+		<profile>
+			<id>profile-gpg</id>
+			
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.6</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>		
+		</profile>
+		
+		<profile>
+			<id>sign-jars</id>
+
+			<activation>
+				<property><name>signJars</name></property>
+			</activation>
+			
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jarsigner-plugin</artifactId>
+						<version>1.3.2</version>
+						
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>package</phase>
+								<inherited>true</inherited>
+							</execution>
+							
+							<execution>
+								<id>verify</id>
+								<goals>
+									<goal>verify</goal>
+								</goals>
+								<phase>verify</phase>
+								<inherited>true</inherited>
+							</execution>
+						</executions>
+						
+						<configuration>
+							<keystore>${signing.keystore.path}</keystore>
+							<storetype>${signing.keystore.type}</storetype>
+							<alias>${signing.keystore.alias}</alias>
+							<storepass>${signing.keystore.password}</storepass>
+							<keypass>${signing.key.password}</keypass>
+						</configuration>				
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>deploy-as</id>
+			
+			<activation>
+				<property><name>deployAs</name></property>
+			</activation>
+			
+			<build>
+				<plugins>					
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat6-maven-plugin</artifactId>
+						<version>2.1</version>
+						
+						<configuration>
+							<path>${env.conf.as.contextPath}</path>
+							<url>${env.conf.as.protocol}://${env.conf.as.hostName}:${env.conf.as.port}${env.conf.as.contextRoot}/manager/text</url>
+							<server>srv.${env.type}.tomcat6</server>
+							<update>true</update>
+							<tag>${pkg.version.string}</tag>
+						</configuration>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<version>2.1</version>
+						
+						<configuration>
+							<path>${env.conf.as.contextPath}</path>
+							<url>${env.conf.as.protocol}://${env.conf.as.hostName}:${env.conf.as.port}${env.conf.as.contextRoot}/manager/text</url>
+							<server>srv.${env.type}.tomcat7</server>
+							<update>true</update>
+							<tag>${pkg.version.string}</tag>
+						</configuration>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.codehaus.cargo</groupId>
+						<artifactId>cargo-maven2-plugin</artifactId>
+						<version>1.4.7</version>
+						
+						<configuration>
+							<container>
+								<containerId>tomcat7x</containerId>
+								<type>remote</type>
+							</container>
+							
+							<configuration>
+								<type>runtime</type>
+								
+								<properties>
+									<cargo.server.settings>srv.${env.type}.tomcat7</cargo.server.settings>
+									<cargo.hostname>${env.conf.as.hostName}</cargo.hostname>
+									<cargo.protocol>${env.conf.as.protocol}</cargo.protocol>
+									<cargo.servlet.port>${env.conf.as.port}</cargo.servlet.port>
+									<cargo.remote.uri>${env.conf.as.protocol}://${env.conf.as.hostName}:${env.conf.as.port}${env.conf.as.contextRoot}/manager/text</cargo.remote.uri>
+								</properties>
+							</configuration>
+							
+							<deployer>
+								<type>remote</type>
+							</deployer>
+							
+							<deployables>
+								<deployable>
+									<type>war</type>
+									
+									<properties>
+										<context>${env.conf.as.contextPath}</context>
+									</properties>
+								</deployable>
+							</deployables>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>source-code</id>
+			<activation>
+				<property><name>generateSources</name></property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.4</version>
+						<configuration>
+							<executions>
+								<execution>
+									<id>attach-sources</id>
+									<goals>
+										<goal>jar-no-fork</goal>
+									</goals>
+									<phase>package</phase>
+									<inherited>true</inherited>
+								</execution>
+								
+								<execution>
+									<id>attach-test-sources</id>
+									<goals>
+										<goal>test-jar-no-fork</goal>
+									</goals>
+									<phase>package</phase>
+									<inherited>true</inherited>
+								</execution>
+								
+								<execution>
+									<id>source-aggregate</id>
+									<goals>
+										<goal>source:aggregate</goal>
+									</goals>
+									<phase>package</phase>
+									<inherited>true</inherited>
+								</execution>								
+							</executions>
+							
+							<archive>
+								<manifestEntries>
+									<Specification-Title>${pkg.title}</Specification-Title>
+									<Specification-Version>${pkg.version.string}</Specification-Version>
+									<Bundle-Version>${pkg.version.number}</Bundle-Version>
+									<Specification-Vendor>${org.fullName}</Specification-Vendor>
+									<Implementation-Title>${project.artifactId}</Implementation-Title>
+									<Implementation-Version>${pkg.version.number}-${pkg.version.buildNumber}</Implementation-Version>
+									<Implementation-Vendor>${org.fullName}</Implementation-Vendor>
+									<Implementation-Vendor-Id>${org.vendorId}</Implementation-Vendor-Id>
+									<Implementation-Vendor-URL>${org.url}</Implementation-Vendor-URL>
+									<Implementation-URL>${pkg.url}</Implementation-URL>
+									
+									<Package-Title>${pkg.title}</Package-Title>
+									<Package-Name>${pkg.name}</Package-Name>
+									<Package-Code>${pkg.code}</Package-Code>							
+									<Package-Url>${pkg.url}</Package-Url>
+									<Package-Version>${pkg.version.string}</Package-Version>
+									<Package-Vendor>${org.fullName}</Package-Vendor>
+									<Package-Technology>${pkg.technology.code}</Package-Technology>
+									<Package-Product>${pkg.product.code}</Package-Product>
+								</manifestEntries>
+							</archive>
+						</configuration>
+					</plugin>				
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>report-generate</id>
+			
+			<activation>
+				<property><name>generateReports</name></property>
+			</activation>
+			
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-site-plugin</artifactId>
+						<version>3.4</version>
+						
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.doxia</groupId>
+								<artifactId>doxia-module-xhtml</artifactId>
+								<version>1.5</version>
+							</dependency>
+							
+							<dependency>
+								<groupId>org.apache.maven.doxia</groupId>
+								<artifactId>doxia-module-confluence</artifactId>
+								<version>1.5</version>
+							</dependency>
+							
+							<dependency>
+								<groupId>org.apache.maven.doxia</groupId>
+								<artifactId>doxia-module-rtf</artifactId>
+								<version>1.5</version>
+							</dependency>
+						</dependencies>
+						
+						<executions>
+							<execution>
+								<goals>
+									<goal>site</goal>
+									<goal>deploy</goal>
+								</goals>
+								
+								<phase>deploy</phase> 
+							</execution>
+						</executions>
+						<configuration>
+							<outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
+							<!--<locales>en,tr</locales>-->
+						</configuration>
+					</plugin>				
+				</plugins>
+			</build>
+			
+			<reporting>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-project-info-reports-plugin</artifactId>
+						<version>2.8</version>
+						
+						<configuration>
+							<dependencyLocationsEnabled>false</dependencyLocationsEnabled><!-- waiting for MPIR-267 -->
+							<customBundle>${project.basedir}/src/site/custom/project-info-report.properties</customBundle>
+						</configuration>
+						
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>summary</report>
+									<report>dependency-info</report>
+									<report>modules</report>
+									<report>license</report>
+									<report>project-team</report>
+									<report>scm</report>
+									<report>issue-tracking</report>
+									<report>mailing-list</report>
+									<report>dependency-management</report>
+									<report>dependencies</report>
+									<report>dependency-convergence</report>
+									<report>cim</report>
+									<report>plugin-management</report>
+									<report>plugins</report>
+									<report>distribution-management</report>
+								</reports>
+							</reportSet>
+						</reportSets>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+						<version>2.6</version>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.codehaus.sonar-plugins</groupId>
+						<artifactId>maven-report</artifactId>
+						<version>0.1</version>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.7.0.201403182114</version>
+					</plugin>
+					
+					<plugin> 
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-report-plugin</artifactId>
+						<version>2.17</version>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>2.13</version>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-changelog-plugin</artifactId>
+						<version>2.3</version>
+						<configuration>
+							<type>range</type>
+							<range>30</range>
+							<headingDateFormat>dd.MM.yyyy</headingDateFormat>
+						</configuration>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-pmd-plugin</artifactId>
+						<version>3.2</version>
+						<configuration>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>taglist-maven-plugin</artifactId>
+						<version>2.4</version>
+						
+						<configuration>
+							<encoding>${pkg.build.sourceEncoding}</encoding>
+							<sourceFileLocale>en</sourceFileLocale>
+							<emptyComments>false</emptyComments>
+							<aggregate>true</aggregate>
+							
+							<tagListOptions>
+								<tagClasses>
+									<tagClass>
+										<displayName>Documentation Work</displayName>
+										
+										<tags>
+											<tag>
+												<matchString>DOCUMENT_ME</matchString>
+												<matchType>ignoreCase</matchType>
+											</tag>
+											
+											<tag>
+												<matchString>NOT_YET_DOCUMENTED</matchString>
+												<matchType>ignoreCase</matchType>
+											</tag>
+										</tags>
+									</tagClass>
+									
+									<tagClass>
+										<displayName>Code Work</displayName>
+										
+										<tags>
+											<tag>
+												<matchString>&lt;todo</matchString>
+												<matchType>ignoreCase</matchType>
+											</tag>
+											
+											<tag>
+												<matchString>TODO</matchString>
+												<matchType>ignoreCase</matchType>
+											</tag>
+											
+											<tag>
+												<matchString>@TODO</matchString>
+												<matchType>ignoreCase</matchType>
+											</tag>
+										</tags>
+									</tagClass>
+									
+									<tagClass>
+										<displayName>Code Fix</displayName>
+										
+										<tags>
+											<tag>
+												<matchString>FIXME</matchString>
+												<matchType>ignoreCase</matchType>
+											</tag>
+											
+											<tag>
+												<matchString>@FIXME</matchString>
+												<matchType>ignoreCase</matchType>
+											</tag>
+										</tags>
+									</tagClass>
+								</tagClasses>
+							</tagListOptions>
+						</configuration>
+					</plugin>
+					
+					<plugin>
+						<groupId>com.atlassian.maven.plugins</groupId>
+						<artifactId>maven-clover2-plugin</artifactId>
+						<version>3.2.2</version>
+						
+						<configuration>
+							<generatePdf>true</generatePdf>
+							<generateXml>true</generateXml>
+							<generateHtml>true</generateHtml>
+							<generateJson>true</generateJson>
+						</configuration>
+					</plugin>
+				</plugins>
+			</reporting>
+		</profile>
+	</profiles>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.tech-java</id>
+			<name>Enterprise Maven Repository for Maven Plugins</name>
+			<url>https://dev.obss.com.tr/nexus/content/groups/tech-java/</url>
+
+			<releases>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+				<enabled>true</enabled>
+			</releases>
+
+			<snapshots>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<repositories>
+		<repository>
+			<id>repo.tech-java</id>
+			<name>Enterprise Maven Repository for Java</name>
+			<url>https://dev.obss.com.tr/nexus/content/groups/tech-java/</url>
+
+			<releases>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+				<enabled>true</enabled>
+			</releases>
+
+			<snapshots>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>repo.internal-java-release</id>
+			<name>Internal Release Repository for Java</name>
+			<url>https://dev.obss.com.tr/nexus/content/repositories/internal-java-release/</url>
+		</repository>
+		
+		<snapshotRepository>
+			<id>repo.internal-java-snapshot</id>
+			<name>Internal Snapshot Repository for Java</name>
+			<url>https://dev.obss.com.tr/nexus/content/repositories/internal-java-snapshot/</url>
+		</snapshotRepository>
+		
+		<site>
+			<id>repo.internal-site</id>
+			<name>Site Repository</name>
+			<url>dav:https://dev.obss.com.tr/nexus/content/sites/internal-site/${pkg.product.code}/${pkg.name}/${project.version}</url>
+		</site>
+	</distributionManagement>
+	
+	<scm>
+		<connection>${pkg.links.scm}</connection>
+		<developerConnection>${pkg.links.scm.dev}</developerConnection>
+		<url>${pkg.links.scm.url}</url>
+	</scm>
+
+	<issueManagement>
+		<system>JIRA</system>
+		<url>${pkg.links.issue}</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Bamboo</system>
+		<url>${pkg.links.ci}</url>
+	</ciManagement>
+</project>

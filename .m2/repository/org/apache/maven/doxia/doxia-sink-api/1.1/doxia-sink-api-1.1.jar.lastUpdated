@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:44 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679639024927
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact org.apache.maven.doxia\:doxia-sink-api\:jar\:1.1 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/org/apache/maven/doxia/doxia-sink-api/1.1/doxia-sink-api-1.1.jar 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679639023778

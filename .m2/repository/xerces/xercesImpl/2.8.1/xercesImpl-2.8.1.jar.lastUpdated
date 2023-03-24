@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:44 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679639024926
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact xerces\:xercesImpl\:jar\:2.8.1 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/xerces/xercesImpl/2.8.1/xercesImpl-2.8.1.jar 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679639023778

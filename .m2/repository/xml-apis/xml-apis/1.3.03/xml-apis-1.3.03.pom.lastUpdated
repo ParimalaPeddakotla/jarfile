@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Mar 24 06:23:39 UTC 2023
+https\://repo.maven.apache.org/maven2/.lastUpdated=1679639019664
+https\://dev.obss.com.tr/nexus/content/groups/tech-java/.error=Could not transfer artifact xml-apis\:xml-apis\:pom\:1.3.03 from/to repo.tech-java (https\://dev.obss.com.tr/nexus/content/groups/tech-java/)\: Authentication failed for https\://dev.obss.com.tr/nexus/content/groups/tech-java/xml-apis/xml-apis/1.3.03/xml-apis-1.3.03.pom 401 Unauthorized
+@default-repo.tech-java-https\://dev.obss.com.tr/nexus/content/groups/tech-java/.lastUpdated=1679639019644
